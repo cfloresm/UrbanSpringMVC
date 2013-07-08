@@ -7,13 +7,12 @@
 <title>Send Notification</title>
 </head>
 <body>
-	<form:form  action="notify" name="messageForm" modelAttribute="messageForm"  method='post' accept-charset='UTF-8' >
-   		<form:select path="userId" >
-     		<form:option value="" label="Selecciona un usuario :"></form:option>
-     		<form:options items="${users}"></form:options>
-  		 </form:select><br/>
-  		 <form:textarea path="message" rows="5" cols="30" /><br/>
-  		 <input type="submit" value="Enviar notificaci&oacute;n">
+	<form:form  action="pushnotification" name="messageForm" modelAttribute="messageForm"  method='post' accept-charset='UTF-8' >
+		<form:label path="email">User:</form:label>
+		<form:select path="email" items="${users}" multiple="true" />
+		<br/>
+		<form:textarea path="message" rows="5" cols="30" /><br/>
+		<input type="submit" value="Enviar notificaci&oacute;n">
 	</form:form>
 	<a>${confirm}</a>
 </body>

@@ -4,14 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Register</title>
+<title>Log In</title>
 </head>
 <body>
-	<form:form  action="user" name="userForm" modelAttribute="userForm"  method='post' accept-charset='UTF-8' >
-		<form:input path="email" name="email" type="text" placeholder="Email"/> <br/>
-		<form:input path="username" name="username" type="text" placeholder="Username"/><br/>
+<div>
+${errorMsg}
+</div>
+<div>
+${infoMsg}
+</div>
+	<form:form  action="login" name="loginForm" modelAttribute="loginForm" method='post' accept-charset='UTF-8' >
+		<form:input path="username" name="username" type="text" placeholder="Email"/> <br/>
 		<form:input path="password" name="password" type="password" placeholder="Password"/><br/>
-		<button  type="submit">Sign In</button>
+		<a href="userForm">Sign In</a>
+		<button type="submit" value="Log In">Log In</button>
 	</form:form>
 </body>
 </html>
