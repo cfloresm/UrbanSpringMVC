@@ -96,8 +96,7 @@ public class SingleController {
 			return response;
 		}
 
-		Map<String, Object> map = memoryStore.get(urbanApp.getEmail());
-		User user = (User) map.get("user");
+		User user = (User) memoryStore.get(urbanApp.getEmail()).get("user");
 
 		if(user.getApid() != null){
 			response.getStatusInfo().setStatusCode(100);
@@ -108,16 +107,13 @@ public class SingleController {
 		}
 
 		user.setApid(urbanApp.getApid());
-//		map.put("user", user);
-//		memoryStore.put(urbanApp.getEmail(), map);
-
 
 	    return response;
 	}
 
 	@RequestMapping(value="/urbanappForm", method = RequestMethod.GET)
 	public String getUrbanApp(ModelMap model) {
-		model.addAttribute("users", memoryStore);
+		model.addAttribute("users", memoryStore.keySet());
 		model.addAttribute("messageForm", new MessageForm());
 		return "notify";
 	}
@@ -127,22 +123,19 @@ public class SingleController {
 	public String postPushNotification(@ModelAttribute(value="messageForm") MessageForm messageForm, ModelMap model) {
 
 		String email = messageForm.getEmail();
-		String errorMsg = null;
 
 		if(!memoryStore.containsKey(email)){
-			errorMsg = "User no exists.";
+			model.addAttribute("error", "User no exists.");
+			return "notify";
 		}
 
 		User user = (User) memoryStore.get(email).get("user");
-
 
 		try {
 			urbanService.sendNotification(user.getApid(), user.getEmail(), messageForm.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		model.addAttribute("error", errorMsg);
 		return "notify";
 	}
 

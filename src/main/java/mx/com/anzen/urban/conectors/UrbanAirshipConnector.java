@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.security.cert.Certificate;
 
@@ -37,26 +39,29 @@ public class UrbanAirshipConnector {
 		conn.setRequestProperty("charset", "UTF-8");
 		conn.setRequestProperty("content-encoding", "UTF-8");
 		conn.setRequestProperty("content-type", "application/json");
-		conn.setRequestProperty("content-length",
-				"" + Integer.toString(bytes.length));
+		conn.setRequestProperty("content-length", Integer.toString(bytes.length));
 		conn.setUseCaches(false);
-		conn.setRequestProperty("authorization", "Basic " + authcStringEnc);
+		//conn.setRequestProperty("authorization", "Basic " + authcStringEnc);
+
+
+		Authenticator au = new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("YUnEi0B5QqaIfKu8r7jsxA",
+						"bd-IO2ISREuhM_0YIMdacQ".toCharArray());
+			}
+		};
+
+		Authenticator.setDefault(au);
+
 
 		OutputStream out = conn.getOutputStream();
 		out.write(bytes, 0, bytes.length);
 		out.flush();
 		out.close();
 
-		print_https_cert(conn);
-//		Authenticator au = new Authenticator() {
-//			@Override
-//			protected PasswordAuthentication getPasswordAuthentication() {
-//				return new PasswordAuthentication("usuario",
-//						"clave".toCharArray());
-//			}
-//		};
-//
-//		Authenticator.setDefault(au);
+		//print_https_cert(conn);
+
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				conn.getInputStream()));
