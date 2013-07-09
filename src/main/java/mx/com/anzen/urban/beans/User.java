@@ -5,6 +5,8 @@ public class User {
 	private String password;
 	private String email;
 	private String apid;
+	private int typeDevice;
+	
 	public String getApid() {
 		return apid;
 	}
@@ -28,5 +30,11 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getTypeDevice() {
+	    return typeDevice;
+	}
+	public void setTypeDevice(int typeDevice) {
+	    this.typeDevice = typeDevice;
 	}
 }

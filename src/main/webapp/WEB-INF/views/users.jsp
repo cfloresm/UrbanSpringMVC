@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Page</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to Demo.</h1>
-<a href="urbanappForm" target="_self"> <input type="button" name="Send" value="Sen Push Notification" /> </a>
+
 </body>
 </html>

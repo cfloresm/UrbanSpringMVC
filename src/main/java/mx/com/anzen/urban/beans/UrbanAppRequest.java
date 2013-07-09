@@ -1,9 +1,17 @@
 package mx.com.anzen.urban.beans;
 
 public class UrbanAppRequest {
-
+    	
 	private String apid;
 	private String email;
+	private int type;
+	
+	public int getType() {
+	    return type;
+	}
+	public void setType(int type) {
+	    this.type = type;
+	}
 	public String getApid() {
 		return apid;
 	}
